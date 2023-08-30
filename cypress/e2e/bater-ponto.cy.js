@@ -17,10 +17,19 @@ describe('Validar Fluxo de Bater Ponto', () => {
         cy.contains('Entrar').click()
     })
 
-    it.only('Digitar e-mail', () => {
+    it.only('Validar login com um usuário sem informar o campo senha', () => {
         cy.visit('https://app2.pontomais.com.br/registrar-ponto')
         cy.get('.form-control').first().type('lara.medeiros@atlastechnol.com')
+        cy.contains('Entrar').click()
+        cy.contains('[Campo obrigatório.]').should('be.visible')
     })
     
+    it.skip('Validar o fluxo de Bater ponto', () => {
+        cy.visit('https://app2.pontomais.com.br/registrar-ponto')
+        cy.get('.form-control').first().type('lara.medeiros@atlastechnol.com')
+        cy.get('.form-control').eq(1).type('L@r@0104')
+        cy.contains('Entrar').click()
+        cy.get('button[type="button"][class="pm-button pm-primary"]').eq(1).click()
+    })
 
 })
